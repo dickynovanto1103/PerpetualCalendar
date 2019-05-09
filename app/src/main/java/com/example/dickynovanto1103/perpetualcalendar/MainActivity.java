@@ -30,21 +30,30 @@ public class MainActivity extends AppCompatActivity {
         dayDisplayer = findViewById(R.id.dayDisplayer);
     }
 
+    public void show(String text, int color) {
+        dayDisplayer.setText(text);
+        dayDisplayer.setTextColor(color);
+    }
+
+    private int getDayOfWeek() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.DAY_OF_WEEK) - 1;
+    }
+
     public void getDay(View v){
         String input = dateInput.getText().toString();
         if(input.isEmpty()){
-            dayDisplayer.setText("date cannot be empty");
-            dayDisplayer.setTextColor(Color.RED);
+            String errorMessage = "date cannot be empty";
+            show(errorMessage, Color.RED);
         }else{
             if(isDateValid(input, "dd/MM/yyyy")) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(date);
-                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-                dayDisplayer.setText("date: "+input + " day:"+days[dayOfWeek]);
-                dayDisplayer.setTextColor(Color.BLACK);
+                int dayOfWeek = getDayOfWeek();
+                String outputDay = "day: "+days[dayOfWeek];
+                show(outputDay, Color.BLACK);
             }else{
-                dayDisplayer.setText("invalid date");
-                dayDisplayer.setTextColor(Color.RED);
+                String errorMessage = "invalid date";
+                show(errorMessage, Color.RED);
             }
         }
     };

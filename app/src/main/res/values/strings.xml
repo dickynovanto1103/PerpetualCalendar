@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PerpetualCalendar</string>
+    <string name="pilih_bahasa">Pilih Bahasa</string>
+    <string name="english">English</string>
+    <string name="indonesia">Indonesia</string>
+    <string name="dd_mm_yyyy">dd/mm/yyyy</string>
+    <string name="cek_hari">Cek hari</string>
 </resources>

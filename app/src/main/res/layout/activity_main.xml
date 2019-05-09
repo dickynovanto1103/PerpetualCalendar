@@ -10,7 +10,7 @@
         android:id="@+id/dateBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="17/08/1945"
+        android:hint="@string/dd_mm_yyyy"
         android:layout_centerInParent="true"
         android:inputType="date" />
 
@@ -21,7 +21,7 @@
         android:layout_below="@id/dateBox"
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
-        android:text="Cek hari"
+        android:text="@string/cek_hari"
         android:onClick="getDay" />
     <TextView
         android:id="@+id/dayDisplayer"
