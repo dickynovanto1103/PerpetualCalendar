@@ -1,5 +1,6 @@
 package com.example.dickynovanto1103.perpetualcalendar;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,7 +57,9 @@ public class MainActivity extends AppCompatActivity {
                 show(errorMessage, Color.RED);
             }
         }
-    };
+    }
+
+    
 
     private boolean isDateValid(String dateToValidate, String dateFormat) {
         if(dateToValidate == null){
@@ -72,5 +75,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return true;
+    }
+
+    public void goToTeam(View v) {
+        Intent intent = new Intent(getApplicationContext(), TeamIdentityActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToIntroduction(View v) {
+        Intent intent = new Intent(getApplicationContext(), IntroductionActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToLanguage(View v) {
+        Intent intent = new Intent(getApplicationContext(), LanguageSelectorActivity.class);
+        startActivity(intent);
     }
 }

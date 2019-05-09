@@ -30,4 +30,33 @@
         android:layout_below="@+id/button"
         android:text=""
         android:layout_centerInParent="true"/>
+
+    <Button
+        android:id="@+id/goToTeam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Team"
+        android:layout_toLeftOf="@+id/goToIntroduction"
+        android:onClick="goToTeam"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:id="@+id/goToIntroduction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Introduction"
+        android:onClick="goToIntroduction"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+    <Button
+        android:id="@+id/goToLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Language"
+        android:layout_toRightOf="@+id/goToIntroduction"
+        android:onClick="goToLanguage"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>

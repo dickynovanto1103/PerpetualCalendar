@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class LanguageSelector extends AppCompatActivity {
+public class LanguageSelectorActivity extends AppCompatActivity {
     Button english, indonesian;
     Language language = Language.getInstance();
     Intent intent;
@@ -17,7 +17,7 @@ public class LanguageSelector extends AppCompatActivity {
         setContentView(R.layout.activity_language_selector);
         english = findViewById(R.id.english);
         indonesian = findViewById(R.id.indonesian);
-        intent = new Intent(this, MainActivity.class);
+        intent = new Intent(this, IntroductionActivity.class);
     }
 
     public void setEnglish(View v) {

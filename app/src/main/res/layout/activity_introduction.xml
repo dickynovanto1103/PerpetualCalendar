@@ -4,28 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LanguageSelectorActivity">
+    tools:context=".IntroductionActivity">
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/Pengantar"
         android:layout_centerHorizontal="true"
-        android:text="@string/pilih_bahasa"
-        android:layout_marginTop="100dp"/>
-    <Button
-        android:id="@+id/english"
+        android:layout_marginTop="100dp" />
+    <TextView
+        android:id="@+id/intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="setEnglish"
-        android:text="@string/english"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"/>
+        android:text="@string/intro"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"/>
     <Button
-        android:id="@+id/indonesian"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="setIndonesian"
-        android:text="@string/indonesia"
+        android:text="Next"
+        android:onClick="goToMainActivity"
         android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/english" />
+        android:layout_below="@+id/intro" />
 </RelativeLayout>

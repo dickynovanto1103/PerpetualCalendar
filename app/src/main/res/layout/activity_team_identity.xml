@@ -4,28 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LanguageSelectorActivity">
+    tools:context=".TeamIdentityActivity">
+
     <TextView
+        android:id="@+id/title_team_identity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Identitas Tim"
         android:layout_centerHorizontal="true"
-        android:text="@string/pilih_bahasa"
         android:layout_marginTop="100dp"/>
-    <Button
-        android:id="@+id/english"
+    <TextView
+        android:id="@+id/disusun_oleh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="setEnglish"
-        android:text="@string/english"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"/>
-    <Button
-        android:id="@+id/indonesian"
+        android:text="Disusun oleh"
+        android:layout_centerInParent="true" />
+    <TextView
+        android:id="@+id/team_member"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="setIndonesian"
-        android:text="@string/indonesia"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/english" />
+        android:text="Dicky Novanto (13515134)"
+        android:layout_below="@+id/disusun_oleh"
+        android:layout_centerInParent="true" />
+
 </RelativeLayout>
