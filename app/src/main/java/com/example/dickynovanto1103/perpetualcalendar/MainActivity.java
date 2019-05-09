@@ -16,10 +16,11 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     EditText dateInput;
-    Button submit;
-    TextView dayDisplayer;
+    Button submit, teamButton, introButton, languageButton;
+    TextView dayDisplayer, perpetualCounting;
     Date date;
-    String[] days = new String[] {"Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
+    String[] days;
+    Language language = Language.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,64 @@ public class MainActivity extends AppCompatActivity {
 
         dateInput = findViewById(R.id.dateBox);
         submit = findViewById(R.id.button);
+        teamButton = findViewById(R.id.goToTeam);
+        introButton = findViewById(R.id.goToIntroduction);
+        languageButton = findViewById(R.id.goToLanguage);
         dayDisplayer = findViewById(R.id.dayDisplayer);
+        perpetualCounting = findViewById(R.id.perpetualCounting);
+        setDays();
+        setIntroButton();
+        setSubmitButton();
+        setLanguageButton();
+        setTeamButton();
+    }
+
+    private void setDays() {
+        if(language.getBahasa() == 0) {
+            days = new String[] {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        }else {
+            days = new String[] {"Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
+        }
+    }
+
+    private void setSubmitButton() {
+        String content;
+        if(language.getBahasa() == 0) {
+            content = "Check date";
+        }else{
+            content = "Cek hari";
+        }
+        submit.setText(content);
+    }
+
+    private void setTeamButton() {
+        String content;
+        if(language.getBahasa() == 0) {
+            content = "Team";
+        }else{
+            content = "Tim";
+        }
+        teamButton.setText(content);
+    }
+
+    private void setIntroButton() {
+        String content;
+        if(language.getBahasa() == 0) {
+            content = "Introduction";
+        }else{
+            content = "Pengantar";
+        }
+        introButton.setText(content);
+    }
+
+    private void setLanguageButton() {
+        String content;
+        if(language.getBahasa() == 0) {
+            content = "Language";
+        }else{
+            content = "Bahasa";
+        }
+        languageButton.setText(content);
     }
 
     public void show(String text, int color) {
@@ -45,21 +103,64 @@ public class MainActivity extends AppCompatActivity {
     public void getDay(View v){
         String input = dateInput.getText().toString();
         if(input.isEmpty()){
-            String errorMessage = "date cannot be empty";
+            String errorMessage = "Date cannot be empty";
+            if(language.getBahasa() == 1) {
+                errorMessage = "Tanggal tidak boleh kosong";
+            }
             show(errorMessage, Color.RED);
         }else{
             if(isDateValid(input, "dd/MM/yyyy")) {
                 int dayOfWeek = getDayOfWeek();
-                String outputDay = "day: "+days[dayOfWeek];
+                String add = "Day: ";
+                if(language.getBahasa() == 1){
+                    add = "Hari: ";
+                }
+                String outputDay = add+days[dayOfWeek];
+                getDayPerpetualCalendar();
                 show(outputDay, Color.BLACK);
             }else{
-                String errorMessage = "invalid date";
+                String errorMessage = "Invalid date";
+                if(language.getBahasa() == 1) {
+                    errorMessage = "Tanggal tidak valid";
+                }
                 show(errorMessage, Color.RED);
             }
         }
     }
 
-    
+    public void getDayPerpetualCalendar() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        month += 10;
+        month %= 12;
+        if (month == 0) {
+            month += 12;
+
+        }
+        if(month > 10) {
+            year--;
+        }
+        int yearMod100 = year % 100;
+        int yearDepan2 = year / 100;
+
+        int hari = day + (int)Math.floor((2.6*month)-0.2) - 2*yearDepan2 + yearMod100 + yearMod100/4 + yearDepan2/4;
+        int temp = hari;
+        hari %= 7;
+        if(hari < 0) {
+            hari += 7;
+        }
+        String initial = "= (" +day + " + floor(2.6 x "+ month + ") - 0.2 - 2 x " + yearDepan2 + " + " + yearMod100 + " + floor(" + yearMod100 + " / 4)" + "+ floor(" + yearDepan2 + " / 4) % 7\n";
+        String next = "= (" + day + " + " + (int)Math.floor((2.6*month) - 0.2) + " - " + 2*yearDepan2 + " + " + yearMod100 + " + " + yearMod100 / 4 + " + " + yearDepan2 / 4 + ") % 7\n";
+        String next2 = "= (" +temp + ") % 7\n";
+        String next3 = ""+hari + " => "+ days[hari];
+        perpetualCounting.setText(initial+next+next2+next3);
+
+    }
+
+
 
     private boolean isDateValid(String dateToValidate, String dateFormat) {
         if(dateToValidate == null){

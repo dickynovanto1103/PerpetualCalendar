@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".IntroductionActivity">
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/title_intro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Pengantar"
@@ -21,6 +21,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"/>
     <Button
+        android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
