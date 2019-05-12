@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TeamIdentityActivity">
+    tools:context=".Activity.TeamIdentityActivity">
 
     <TextView
         android:id="@+id/title_team_identity"
@@ -26,5 +26,13 @@
         android:text="Dicky Novanto (13515134)"
         android:layout_below="@+id/disusun_oleh"
         android:layout_centerInParent="true" />
+    <TextView
+        android:id="@+id/subjectAndInstitution"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/team_member"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:text="MA 2252"/>
 
 </RelativeLayout>

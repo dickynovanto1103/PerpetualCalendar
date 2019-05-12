@@ -1,11 +1,14 @@
-package com.example.dickynovanto1103.perpetualcalendar;
+package com.example.dickynovanto1103.perpetualcalendar.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.dickynovanto1103.perpetualcalendar.Language;
+import com.example.dickynovanto1103.perpetualcalendar.R;
+
 public class TeamIdentityActivity extends AppCompatActivity {
-    TextView teamMembers, title, titleTeamIdentity;
+    TextView teamMembers, title, titleTeamIdentity, subjectAndInstitution;
     Language language = Language.getInstance();
 
     @Override
@@ -15,9 +18,11 @@ public class TeamIdentityActivity extends AppCompatActivity {
         teamMembers = findViewById(R.id.team_member);
         titleTeamIdentity = findViewById(R.id.title_team_identity);
         title = findViewById(R.id.disusun_oleh);
+        subjectAndInstitution = findViewById(R.id.subjectAndInstitution);
         setTeamMembers();
         setTitle();
         setTitleTeamIdentity();
+        setSubjectAndInstitution();
     }
 
     private void setTitle() {
@@ -43,10 +48,17 @@ public class TeamIdentityActivity extends AppCompatActivity {
     private void setTitleTeamIdentity() {
         String content;
         if(language.getBahasa() == 0) {
-            content = "Team Members";
+            content = "Perpetual Calendar Team";
         }else {
-            content = "Anggota Tim";
+            content = "Kelompok Perpetual Calendar";
         }
         titleTeamIdentity.setText(content);
+    }
+
+    private void setSubjectAndInstitution() {
+        String content = "MA 2252 Pengantar Teori Bilangan";
+        content += "\n";
+        content += "Institut Teknologi Bandung";
+        subjectAndInstitution.setText(content);
     }
 }

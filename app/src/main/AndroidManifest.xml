@@ -10,20 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".TeamIdentityActivity"
-            android:parentActivityName=".MainActivity">
+            android:name=".Activity.AddEventActivity"
+            android:parentActivityName=".Activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LanguageSelectorActivity" />
+                android:value=".Activity.LanguageSelectorActivity" />
         </activity>
         <activity
-            android:name=".IntroductionActivity"
-            android:parentActivityName=".LanguageSelectorActivity">
+            android:name=".Activity.TeamIdentityActivity"
+            android:parentActivityName=".Activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LanguageSelectorActivity" />
+                android:value=".Activity.LanguageSelectorActivity" />
         </activity>
-        <activity android:name=".LanguageSelectorActivity">
+        <activity
+            android:name=".Activity.IntroductionActivity"
+            android:parentActivityName=".Activity.LanguageSelectorActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activity.LanguageSelectorActivity" />
+        </activity>
+        <activity android:name=".Activity.LanguageSelectorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,11 +38,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:parentActivityName=".IntroductionActivity">
+            android:name=".Activity.MainActivity"
+            android:parentActivityName=".Activity.IntroductionActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LanguageSelectorActivity" />
+                android:value=".Activity.LanguageSelectorActivity" />
         </activity>
     </application>
 

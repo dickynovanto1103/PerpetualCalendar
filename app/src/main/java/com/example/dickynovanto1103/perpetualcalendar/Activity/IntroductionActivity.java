@@ -1,4 +1,4 @@
-package com.example.dickynovanto1103.perpetualcalendar;
+package com.example.dickynovanto1103.perpetualcalendar.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.dickynovanto1103.perpetualcalendar.Language;
+import com.example.dickynovanto1103.perpetualcalendar.R;
 
 public class IntroductionActivity extends AppCompatActivity {
     Button nextButton;
