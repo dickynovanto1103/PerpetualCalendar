@@ -8,25 +8,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.dickynovanto1103.perpetualcalendar.DateParser;
+import com.example.dickynovanto1103.perpetualcalendar.Days;
 import com.example.dickynovanto1103.perpetualcalendar.Language;
 import com.example.dickynovanto1103.perpetualcalendar.R;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     EditText dateInput;
-    Button submit, addEvent, teamButton, introButton, languageButton, seeEvents;
+    Button submit, addEvent, teamButton, introButton, languageButton, seeEvents, help;
     TextView dayDisplayer, perpetualCounting;
     Date date;
-    String[] days;
     Language language = Language.getInstance();
+    Days days = Days.getInstance();
     final private int EMPTY_DATE = 0;
     final private int INVALID_DATE = 1;
     final private int VALID_DATE = 2;
+    final private String DATE_FORMAT = "dd/MM/yyyy";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +49,16 @@ public class MainActivity extends AppCompatActivity {
         perpetualCounting = findViewById(R.id.perpetualCounting);
         addEvent = findViewById(R.id.addEventButton);
         seeEvents = findViewById(R.id.see_event_list);
+        help = findViewById(R.id.help_button);
     }
 
     private void setView() {
-        setDays();
         setIntroButton();
         setSubmitButton();
         setLanguageButton();
         setTeamButton();
         setAddEventButton();
         setSeeEventButton();
-    }
-
-    private void setDays() {
-        if(language.getBahasa() == 0) {
-            days = new String[] {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-        }else {
-            days = new String[] {"Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
-        }
     }
 
     private void setSubmitButton() {
@@ -127,6 +121,16 @@ public class MainActivity extends AppCompatActivity {
         seeEvents.setText(content);
     }
 
+    private void setHelpButton() {
+        String content;
+        if(language.getBahasa() == 0){
+            content = "Help";
+        }else{
+            content = "Bantuan";
+        }
+        seeEvents.setText(content);
+    }
+
     public void show(String text, int color) {
         dayDisplayer.setText(text);
         dayDisplayer.setTextColor(color);
@@ -158,6 +162,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToHelpActivity(View v) {
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        startActivity(intent);
+    }
+
     private int getDayOfWeek() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -171,10 +180,12 @@ public class MainActivity extends AppCompatActivity {
             show(errorMessage, Color.RED);
             perpetualCounting.setText("");
         }else{
-            if(isDateValid(input, "dd/MM/yyyy")) {
+            DateParser dateParser = new DateParser();
+            date = dateParser.parseDate(input, DATE_FORMAT);
+            if(date != null) {
                 int dayOfWeek = getDayOfWeek();
                 String add = getMessage(VALID_DATE);
-                String outputDay = add+days[dayOfWeek];
+                String outputDay = add+days.getDay(dayOfWeek);
                 getDayPerpetualCalendar();
                 show(outputDay, Color.BLACK);
                 addEvent.setEnabled(true);
@@ -194,12 +205,14 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 message = "Tanggal tidak boleh kosong";
             }
+            showToast(message);
         }else if(idMessage == INVALID_DATE) {
             if(language.getBahasa() == 0) {
                 message = "Invalid date";
             }else{
                 message = "Tanggal tidak valid";
             }
+            showToast(message);
         }else {
             if(language.getBahasa() == 0) {
                 message = "Day: ";
@@ -208,6 +221,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return message;
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     public void getDayPerpetualCalendar() {
@@ -229,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
         String initial = "= (" +day + " + floor(2.6 x "+ month + ") - 0.2 - 2 x " + yearDepan2 + " + " + yearMod100 + " + floor(" + yearMod100 + " / 4)" + "+ floor(" + yearDepan2 + " / 4) % 7\n";
         String next = "= (" + day + " + " + (int)Math.floor((2.6*month) - 0.2) + " - " + 2*yearDepan2 + " + " + yearMod100 + " + " + yearMod100 / 4 + " + " + yearDepan2 / 4 + ") % 7\n";
         String next2 = "= (" +temp + ") % 7\n";
-        String next3 = ""+hari + " => "+ days[hari];
+        String next3 = ""+hari + " => "+ days.getDay(hari);
         perpetualCounting.setText(initial+next+next2+next3);
     }
 
@@ -249,21 +266,5 @@ public class MainActivity extends AppCompatActivity {
             year--;
         }
         return year;
-    }
-
-    private boolean isDateValid(String dateToValidate, String dateFormat) {
-        if(dateToValidate == null){
-            return false;
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        sdf.setLenient(false);
-        try {
-            date = sdf.parse(dateToValidate);
-        } catch (ParseException e) {
-            return false;
-        }
-
-        return true;
     }
 }

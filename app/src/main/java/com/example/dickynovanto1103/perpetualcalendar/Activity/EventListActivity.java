@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.dickynovanto1103.perpetualcalendar.Database.DatabaseHelper;
 import com.example.dickynovanto1103.perpetualcalendar.Event;
+import com.example.dickynovanto1103.perpetualcalendar.Language;
 import com.example.dickynovanto1103.perpetualcalendar.R;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class EventListActivity extends AppCompatActivity {
 
     DatabaseHelper databaseHelper;
     private ListView listView;
+    Language language = Language.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,14 @@ public class EventListActivity extends AppCompatActivity {
 
     private void populateListView() {
         Cursor data = databaseHelper.getData();
-        ArrayList<Event> list = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
         while(data.moveToNext()) {
             Event event = getEvent(data);
-            list.add(event);
+            if(language.getBahasa() == 0) {
+                list.add("Date: "+ event.getDateString() + "\nTitle: " + event.getTitle() + "\nContent: " + event.getContent());
+            }else{
+                list.add("Tanggal: "+ event.getDateString() + "\nJudul: " + event.getTitle() + "\nKonten: " + event.getContent());
+            }
         }
 
         ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
@@ -57,7 +63,10 @@ public class EventListActivity extends AppCompatActivity {
         String date = data.getString(1);
         String title = data.getString(2);
         String content = data.getString(3);
+        System.out.println("id: " + id + " date: "+ date + " title " + title + " content: "+ content);
 
+        databaseHelper.deleteData(Integer.parseInt(id));
+        System.out.println("deleted id: " + id);
         Event event = new Event(Integer.parseInt(id), date, title, content);
         return event;
     }

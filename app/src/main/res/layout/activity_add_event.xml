@@ -11,7 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tanggal: "
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/black"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
     <EditText
         android:id="@+id/event_title"
         android:layout_width="wrap_content"

@@ -7,6 +7,14 @@
     tools:visibility="visible"
     android:background="@color/colorPastel">
 
+    <Button
+        android:id="@+id/help_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="help"
+        android:layout_alignParentRight="true"
+        android:onClick="goToHelpActivity" />
+
     <EditText
         android:id="@+id/dateBox"
         android:layout_width="wrap_content"
