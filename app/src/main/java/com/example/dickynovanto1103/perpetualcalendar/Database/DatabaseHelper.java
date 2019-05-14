@@ -11,9 +11,9 @@ import com.example.dickynovanto1103.perpetualcalendar.Event;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     final static private String TABLE_NAME = "event_table";
-    final private String COL0 = "date";
-    final private String COL1 = "title";
-    final private String COL2 = "content";
+    final private static String COL0 = "date";
+    final private static String COL1 = "title";
+    final private static String COL2 = "content";
 
     public DatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, 1);
@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP IF TABLE EXIST "+TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXIST " + TABLE_NAME);
         onCreate(db);
     }
 
@@ -51,5 +51,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public void deleteData(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COL0 + " = '" + id + "'";
+        System.out.println("delete query: "+ query);
+        System.out.println("deleting id: "+id);
+        db.execSQL(query);
+    }
 
 }

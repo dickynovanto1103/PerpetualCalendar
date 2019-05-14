@@ -19,7 +19,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     EditText dateInput;
-    Button submit, addEvent, teamButton, introButton, languageButton;
+    Button submit, addEvent, teamButton, introButton, languageButton, seeEvents;
     TextView dayDisplayer, perpetualCounting;
     Date date;
     String[] days;
@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         dayDisplayer = findViewById(R.id.dayDisplayer);
         perpetualCounting = findViewById(R.id.perpetualCounting);
         addEvent = findViewById(R.id.addEventButton);
+        seeEvents = findViewById(R.id.see_event_list);
     }
 
     private void setView() {
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setLanguageButton();
         setTeamButton();
         setAddEventButton();
+        setSeeEventButton();
     }
 
     private void setDays() {
@@ -115,6 +117,16 @@ public class MainActivity extends AppCompatActivity {
         addEvent.setText(content);
     }
 
+    private void setSeeEventButton() {
+        String content;
+        if(language.getBahasa() == 0){
+            content = "See events";
+        }else{
+            content = "Lihat daftar kejadian";
+        }
+        seeEvents.setText(content);
+    }
+
     public void show(String text, int color) {
         dayDisplayer.setText(text);
         dayDisplayer.setTextColor(color);
@@ -137,6 +149,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToAddEventPage(View v) {
         Intent intent = new Intent(getApplicationContext(), AddEventActivity.class);
+        intent.putExtra("date", dateInput.getText().toString());
+        startActivity(intent);
+    }
+
+    public void goToEventListActivity(View v) {
+        Intent intent = new Intent(getApplicationContext(), EventListActivity.class);
         startActivity(intent);
     }
 

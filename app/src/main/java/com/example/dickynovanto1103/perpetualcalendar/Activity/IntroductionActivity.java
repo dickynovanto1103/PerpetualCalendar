@@ -27,7 +27,7 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
     public void goToMainActivity(View v) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
         startActivity(intent);
     }
 

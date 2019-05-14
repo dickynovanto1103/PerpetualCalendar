@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Activity.HelpActivity"
+            android:parentActivityName=".Activity.IntroductionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activity.LanguageSelectorActivity" />
+        </activity>
+        <activity android:name=".Activity.EventListActivity" />
+        <activity
             android:name=".Activity.AddEventActivity"
             android:parentActivityName=".Activity.MainActivity">
             <meta-data
@@ -39,7 +47,7 @@
         </activity>
         <activity
             android:name=".Activity.MainActivity"
-            android:parentActivityName=".Activity.IntroductionActivity">
+            android:parentActivityName=".Activity.HelpActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Activity.LanguageSelectorActivity" />
