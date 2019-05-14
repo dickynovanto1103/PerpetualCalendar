@@ -11,9 +11,9 @@ import com.example.dickynovanto1103.perpetualcalendar.Event;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     final static private String TABLE_NAME = "event_table";
-    final private static String COL0 = "date";
-    final private static String COL1 = "title";
-    final private static String COL2 = "content";
+    final private static String DATE = "date";
+    final private static String TITLE = "title";
+    final private static String CONTENT = "content";
 
     public DatabaseHelper(Context context) {
         super(context, TABLE_NAME, null, 1);
@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + COL0 + " TEXT, " + COL1 + " TEXT, " + COL2 + " TEXT)";
+        String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + DATE + " TEXT, " + TITLE + " TEXT, " + CONTENT + " TEXT)";
         db.execSQL(createTable);
     }
 
@@ -34,9 +34,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean addData(Event event) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL0, event.getDateString());
-        contentValues.put(COL1, event.getTitle());
-        contentValues.put(COL2, event.getContent());
+        contentValues.put(DATE, event.getDateString());
+        contentValues.put(TITLE, event.getTitle());
+        contentValues.put(CONTENT, event.getContent());
 
         System.out.println("adding data");
         long result = db.insert(TABLE_NAME, null, contentValues);
@@ -51,11 +51,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public Cursor getDataWithID(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + "ID" + " = '" + id + "'";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
     public void deleteData(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "DELETE FROM " + TABLE_NAME + " WHERE " + "ID" + " = '" + id + "'";
         System.out.println("delete query: "+ query);
         System.out.println("deleting id: "+id);
+        db.execSQL(query);
+    }
+
+    public void editData(Event event) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + TABLE_NAME + " SET " + TITLE + " = '" + event.getTitle() + "', " + CONTENT + " = '" + event.getContent() + "' WHERE ID = '" + event.getId() + "'";
+        System.out.println("query: " + query);
         db.execSQL(query);
     }
 

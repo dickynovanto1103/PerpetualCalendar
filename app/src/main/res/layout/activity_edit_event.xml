@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.EditEventActivity"
+    android:background="@color/colorPastel">
+
+    <EditText
+        android:id="@+id/event_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Title of event here"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/date_viewer" />
+    <EditText
+        android:id="@+id/event_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/event_title"
+        android:hint="Content of event here"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
+    <Button
+        android:id="@+id/event_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/event_content"
+        android:text="Save"
+        android:onClick="saveEvent" />
+    <Button
+        android:id="@+id/event_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/event_content"
+        android:text="Delete"
+        android:layout_toRightOf="@+id/event_save"
+        android:onClick="deleteEvent" />
+</RelativeLayout>
