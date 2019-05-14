@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AddEventActivity">
+    tools:context=".Activity.AddEventActivity"
+    android:background="@color/colorPastel">
     <TextView
         android:id="@+id/date_viewer"
         android:layout_width="wrap_content"
