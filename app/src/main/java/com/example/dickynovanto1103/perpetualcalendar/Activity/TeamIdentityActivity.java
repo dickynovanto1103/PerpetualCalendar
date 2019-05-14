@@ -56,7 +56,12 @@ public class TeamIdentityActivity extends AppCompatActivity {
     }
 
     private void setSubjectAndInstitution() {
-        String content = "MA 2252 Pengantar Teori Bilangan";
+        String content = "MA 2252 Pengantar Teori Bilangan ";
+        if(language.getBahasa() == 0){
+            content += "2nd Semester";
+        }else{
+            content += "Semester 2";
+        }
         content += "\n";
         content += "Institut Teknologi Bandung";
         subjectAndInstitution.setText(content);

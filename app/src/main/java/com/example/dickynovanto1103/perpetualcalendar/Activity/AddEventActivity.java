@@ -21,6 +21,7 @@ public class AddEventActivity extends AppCompatActivity {
     Button addEvent;
     EditText title, content;
     TextView dateViewer;
+    String dateString;
     Language language = Language.getInstance();
     DatabaseHelper databaseHelper;
 
@@ -81,7 +82,7 @@ public class AddEventActivity extends AppCompatActivity {
     private void setDateViewer() {
         String content;
         Intent receivedIntent = getIntent();
-        String dateString = receivedIntent.getStringExtra("date");
+        dateString = receivedIntent.getStringExtra("date");
         System.out.println("dateString: "+ dateString);
         if(language.getBahasa() == 0) {
             content = "Date: ";
@@ -103,7 +104,7 @@ public class AddEventActivity extends AppCompatActivity {
             }
             Toast.makeText(getApplicationContext(), content, Toast.LENGTH_SHORT).show();
         }else{
-            Event event = new Event(1, "12/12/1998", titleText, contentText);
+            Event event = new Event(1, dateString, titleText, contentText);
             if(language.getBahasa() == 0){
                 content = "Event added";
             }else{

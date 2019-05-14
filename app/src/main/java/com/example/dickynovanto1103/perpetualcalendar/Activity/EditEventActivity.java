@@ -43,6 +43,7 @@ public class EditEventActivity extends AppCompatActivity {
 
     private void getDataFromDatabase(int id) {
         Cursor data = databaseHelper.getDataWithID(id);
+        System.out.println("getData id: " + id + " data: " + data);
         Event event = new Event(1, "12/12/1190", "title", "content");
         while(data.moveToNext()) {
             event = getEvent(data);

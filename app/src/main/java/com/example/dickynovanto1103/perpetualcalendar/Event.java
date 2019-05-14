@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Event {
+public class Event implements Comparable<Event> {
     private int id;
     private String dateString, title, content;
     private Date date;
@@ -52,5 +52,10 @@ public class Event {
 
     public Date getDate() {
         return date;
+    }
+
+    @Override
+    public int compareTo(Event event) {
+        return this.getDate().before(event.getDate()) ? -1 : 1;
     }
 }

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.dickynovanto1103.perpetualcalendar.DateParser;
 import com.example.dickynovanto1103.perpetualcalendar.Days;
 import com.example.dickynovanto1103.perpetualcalendar.Language;
+import com.example.dickynovanto1103.perpetualcalendar.PerpetualCalendar;
 import com.example.dickynovanto1103.perpetualcalendar.R;
 
 import java.util.Calendar;
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
     public void show(String text, int color) {
         dayDisplayer.setText(text);
         dayDisplayer.setTextColor(color);
+        showToast(text);
     }
 
     public void goToTeam(View v) {
@@ -186,8 +188,9 @@ public class MainActivity extends AppCompatActivity {
                 int dayOfWeek = getDayOfWeek();
                 String add = getMessage(VALID_DATE);
                 String outputDay = add+days.getDay(dayOfWeek);
-                getDayPerpetualCalendar();
                 show(outputDay, Color.BLACK);
+
+                handlePerpetualCalendar();
                 addEvent.setEnabled(true);
             }else{
                 String errorMessage = getMessage(INVALID_DATE);
@@ -195,6 +198,12 @@ public class MainActivity extends AppCompatActivity {
                 perpetualCounting.setText("");
             }
         }
+    }
+
+    private void handlePerpetualCalendar() {
+        PerpetualCalendar perpetualCalendar = new PerpetualCalendar(date);
+        String result = perpetualCalendar.getDayPerpetualCalendar();
+        perpetualCounting.setText(result);
     }
 
     private String getMessage(int idMessage) {
@@ -205,14 +214,12 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 message = "Tanggal tidak boleh kosong";
             }
-            showToast(message);
         }else if(idMessage == INVALID_DATE) {
             if(language.getBahasa() == 0) {
                 message = "Invalid date";
             }else{
                 message = "Tanggal tidak valid";
             }
-            showToast(message);
         }else {
             if(language.getBahasa() == 0) {
                 message = "Day: ";
@@ -225,46 +232,5 @@ public class MainActivity extends AppCompatActivity {
 
     private void showToast(String message) {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    public void getDayPerpetualCalendar() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-
-        int month = getMonth(calendar);
-        int year = getYear(calendar, month);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int yearMod100 = year % 100;
-        int yearDepan2 = year / 100;
-
-        int hari = day + (int)Math.floor((2.6*month)-0.2) - 2*yearDepan2 + yearMod100 + yearMod100/4 + yearDepan2/4;
-        int temp = hari;
-        hari %= 7;
-        if(hari < 0) {
-            hari += 7;
-        }
-        String initial = "= (" +day + " + floor(2.6 x "+ month + ") - 0.2 - 2 x " + yearDepan2 + " + " + yearMod100 + " + floor(" + yearMod100 + " / 4)" + "+ floor(" + yearDepan2 + " / 4) % 7\n";
-        String next = "= (" + day + " + " + (int)Math.floor((2.6*month) - 0.2) + " - " + 2*yearDepan2 + " + " + yearMod100 + " + " + yearMod100 / 4 + " + " + yearDepan2 / 4 + ") % 7\n";
-        String next2 = "= (" +temp + ") % 7\n";
-        String next3 = ""+hari + " => "+ days.getDay(hari);
-        perpetualCounting.setText(initial+next+next2+next3);
-    }
-
-    private int getMonth(Calendar calendar) {
-        int month = calendar.get(Calendar.MONTH) + 1;
-        month += 10;
-        month %= 12;
-        if (month == 0) {
-            month += 12;
-        }
-        return month;
-    }
-
-    private int getYear(Calendar calendar, int month) {
-        int year = calendar.get(Calendar.YEAR);
-        if(month > 10) {
-            year--;
-        }
-        return year;
     }
 }

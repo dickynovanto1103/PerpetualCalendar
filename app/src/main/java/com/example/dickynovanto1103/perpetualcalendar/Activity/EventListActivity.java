@@ -18,6 +18,8 @@ import com.example.dickynovanto1103.perpetualcalendar.Language;
 import com.example.dickynovanto1103.perpetualcalendar.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class EventListActivity extends AppCompatActivity {
 
@@ -52,15 +54,25 @@ public class EventListActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public List<Event> getAllEventsSorted(Cursor data) {
+        List<Event> eventList = new ArrayList<>();
+        while(data.moveToNext()) {
+            Event event = getEvent(data);
+            eventList.add(event);
+        }
+        Collections.sort(eventList);
+        return eventList;
+    }
+
     private void populateListView() {
         Cursor data = databaseHelper.getData();
         ArrayList<String> list = new ArrayList<>();
-        while(data.moveToNext()) {
-            Event event = getEvent(data);
+        List<Event> sortedEventList = getAllEventsSorted(data);
+        for(Event event: sortedEventList) {
             if(language.getBahasa() == 0) {
                 list.add(event.getId() + "\nDate: "+ event.getDateString() + "\nTitle: " + event.getTitle() + "\nContent: " + event.getContent());
             }else{
-                list.add("Tanggal: "+ event.getDateString() + "\nJudul: " + event.getTitle() + "\nKonten: " + event.getContent());
+                list.add(event.getId() + "\nTanggal: "+ event.getDateString() + "\nJudul: " + event.getTitle() + "\nKonten: " + event.getContent());
             }
         }
 
