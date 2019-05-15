@@ -2,6 +2,7 @@ package com.example.dickynovanto1103.perpetualcalendar.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.dickynovanto1103.perpetualcalendar.Language;

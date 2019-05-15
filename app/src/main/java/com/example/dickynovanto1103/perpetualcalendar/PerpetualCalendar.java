@@ -8,7 +8,9 @@ public class PerpetualCalendar {
     Days days = Days.getInstance();
 
     public PerpetualCalendar(Date date) {
+
         this.date = date;
+        days.setDay();
     }
 
     public String getDayPerpetualCalendar() {
@@ -23,11 +25,17 @@ public class PerpetualCalendar {
 
         int hari = day + (int)Math.floor((2.6*month)-0.2) - 2*yearDepan2 + yearMod100 + yearMod100/4 + yearDepan2/4;
         int temp = hari;
-        if(date.before(new Date(1582, 10, 5))) {
+        long timePatokan = new Date(1582, 10, 4).getTime();
+        long timeNow = date.getTime();
+        DateParser dateParser = new DateParser();
+        Date patokan = dateParser.parseDate("15/10/1582", "dd/MM/yyyy");
+        System.out.println("timeNow: " + timeNow + " timePatokan: "+timePatokan);
+        if(date.before(patokan)) {
+            System.out.println("date: " + date + " patokan: "+ patokan);
             return handleBeforeSpecialDate(day, month, year);
         }
         hari %= 7;
-        normalize(hari, 7);
+        hari = normalize(hari, 7);
 
         String initial = "= (" +day + " + floor(2.6 x "+ month + " - 0.2)  - 2 x " + yearDepan2 + " + " + yearMod100 + " + floor(" + yearMod100 + " / 4)" + "+ floor(" + yearDepan2 + " / 4) % 7\n";
         String next = "= (" + day + " + " + (int)Math.floor((2.6*month) - 0.2) + " - " + 2*yearDepan2 + " + " + yearMod100 + " + " + yearMod100 / 4 + " + " + yearDepan2 / 4 + ") % 7\n";
@@ -40,7 +48,7 @@ public class PerpetualCalendar {
         int hari = day + (int)Math.floor((2.6*month)-0.2) + year + year/4 - 2;
         int temp = hari;
         hari %= 7;
-        normalize(hari, 7);
+        hari = normalize(hari, 7);
         String initial = "= (" +day + " + floor(2.6 x "+ month + " - 0.2) + " + year + " + floor(" + year+ "/4)\n";
         String next = "= (" + day + " + " + (int)Math.floor((2.6*month) - 0.2) + " + " + year + " + " + year/4 + "\n";
         String next2 = "= (" +temp + ") % 7\n";

@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         setTeamButton();
         setAddEventButton();
         setSeeEventButton();
+        setHelpButton();
+        days.setDay();
     }
 
     private void setSubmitButton() {
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
             content = "Bantuan";
         }
-        seeEvents.setText(content);
+        help.setText(content);
     }
 
     public void show(String text, int color) {
@@ -181,9 +183,11 @@ public class MainActivity extends AppCompatActivity {
             String errorMessage = getMessage(EMPTY_DATE);
             show(errorMessage, Color.RED);
             perpetualCounting.setText("");
+            addEvent.setEnabled(false);
         }else{
             DateParser dateParser = new DateParser();
             date = dateParser.parseDate(input, DATE_FORMAT);
+            System.out.println("input: "+input + " date: "+ date);
             if(date != null) {
                 int dayOfWeek = getDayOfWeek();
                 String add = getMessage(VALID_DATE);
@@ -196,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
                 String errorMessage = getMessage(INVALID_DATE);
                 show(errorMessage, Color.RED);
                 perpetualCounting.setText("");
+                addEvent.setEnabled(false);
             }
         }
     }

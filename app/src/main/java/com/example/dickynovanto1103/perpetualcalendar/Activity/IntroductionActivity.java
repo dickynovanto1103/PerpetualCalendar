@@ -55,9 +55,12 @@ public class IntroductionActivity extends AppCompatActivity {
         TextView introContent = findViewById(R.id.intro);
         if(language.getBahasa() == 0){
             String content = "Perpetual Calendar is a calendar system that is based on day, date, month, and year. This calendar system is usually used to determine a day for a date. This algorithm also includes the leap year";
+            content += "\n\nReference:\n1. Rosen, Elementary Number Theory, 6th edition\n2. https://docs.oracle.com/javase/8/docs/api/java/util/Date.html";
+
             introContent.setText(content);
         }else{
             String content = "Perpetual Calender adalah sistem kalender yang berlaku sepanjang zaman dengan basis hari, tanggal, bulan, dan tahun. Sistem kalender ini biasa digunakan untuk menentukan hari pada suatu tanggal di bulan dan tahun tertentu. Penentuan hari tidak terlepas dari perhitungan tahun kabisat, yaitu penambahan tanggal 4 tahun sekali kecuali kelipatan 100 yang bukan kelipatan 400.";
+            content += "\n\nReferensi:\n1. Rosen, Elementary Number Theory, 6th edition\n2. https://docs.oracle.com/javase/8/docs/api/java/util/Date.html";
             introContent.setText(content);
         }
     }

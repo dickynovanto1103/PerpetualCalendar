@@ -34,6 +34,7 @@
         android:layout_below="@+id/team_member"
         android:layout_centerInParent="true"
         android:layout_marginTop="50dp"
-        android:text="MA 2252"/>
+        android:text="MA 2252"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

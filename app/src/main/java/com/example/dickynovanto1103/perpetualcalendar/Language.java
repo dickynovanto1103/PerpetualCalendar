@@ -1,7 +1,7 @@
 package com.example.dickynovanto1103.perpetualcalendar;
 
 public class Language {
-    public int id;
+    public static int id;
     private static Language instance = new Language();
 
     private Language() {}
